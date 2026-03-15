@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceAstro — Deep Space Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- STARFIELD CANVAS -->
+<canvas id="starfield"></canvas>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="nav-logo">⬡ SpaceAstro</div>
+  <div class="nav-links">
+    <a href="#planets" class="nav-link" data-section="planets">PLANETS</a>
+    <a href="#galaxies" class="nav-link" data-section="galaxies">GALAXIES</a>
+    <a href="#nebulas" class="nav-link" data-section="nebulas">NEBULAS</a>
+    <a href="#constellations" class="nav-link" data-section="constellations">CONSTELLATIONS</a>
+    <a href="#orbits" class="nav-link" data-section="orbits">ORBITS</a>
+  </div>
+  <div class="nav-status">
+    <span class="pulse-dot"></span>
+    <span id="live-time"></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">DEEP SPACE EXPLORATION DATABASE</div>
+    <h1 class="hero-title">
+      <span class="line1">EXPLORE</span>
+      <span class="line2">THE <em>COSMOS</em></span>
+    </h1>
+    <p class="hero-sub">From planetary cores to galaxy clusters — your complete guide to the universe across billions of light years.</p>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">PLANETS</span></div>
+      <div class="hstat"><span class="hstat-n">12</span><span class="hstat-l">GALAXIES</span></div>
+      <div class="hstat"><span class="hstat-n">10</span><span class="hstat-l">NEBULAS</span></div>
+      <div class="hstat"><span class="hstat-n">12</span><span class="hstat-l">CONSTELLATIONS</span></div>
+    </div>
+    <a href="#planets" class="hero-cta">BEGIN EXPLORATION ↓</a>
+  </div>
+  <div class="hero-orrery" id="orrery"></div>
+</section>
+
+<!-- ==================== PLANETS ==================== -->
+<section id="planets" class="section">
+  <div class="section-header">
+    <div class="section-tag">01 / SOLAR SYSTEM</div>
+    <h2 class="section-title">PLANETS</h2>
+    <p class="section-desc">Eight worlds — from scorched Mercury to the icy depths of Neptune.</p>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">ALL</button>
+    <button class="filter-btn" data-filter="terrestrial">TERRESTRIAL</button>
+    <button class="filter-btn" data-filter="gas">GAS GIANTS</button>
+    <button class="filter-btn" data-filter="ice">ICE GIANTS</button>
+  </div>
+  <div class="cards-grid" id="planets-grid"></div>
+</section>
+
+<!-- ==================== GALAXIES ==================== -->
+<section id="galaxies" class="section section-alt">
+  <div class="section-header">
+    <div class="section-tag">02 / GALACTIC</div>
+    <h2 class="section-title">GALAXIES</h2>
+    <p class="section-desc">Island universes — vast collections of billions of stars, gas, and dark matter.</p>
+  </div>
+  <div class="cards-grid wide-cards" id="galaxies-grid"></div>
+</section>
+
+<!-- ==================== NEBULAS ==================== -->
+<section id="nebulas" class="section">
+  <div class="section-header">
+    <div class="section-tag">03 / NEBULAE</div>
+    <h2 class="section-title">NEBULAS</h2>
+    <p class="section-desc">Cosmic nurseries and stellar graveyards — where stars are born and die.</p>
+  </div>
+  <div class="cards-grid" id="nebulas-grid"></div>
+</section>
+
+<!-- ==================== CONSTELLATIONS ==================== -->
+<section id="constellations" class="section section-alt">
+  <div class="section-header">
+    <div class="section-tag">04 / STELLAR PATTERNS</div>
+    <h2 class="section-title">CONSTELLATIONS</h2>
+    <p class="section-desc">Ancient star patterns that have guided navigators and mythmakers for millennia.</p>
+  </div>
+  <div class="cards-grid" id="constellations-grid"></div>
+</section>
+
+<!-- ==================== ORBITS ==================== -->
+<section id="orbits" class="section">
+  <div class="section-header">
+    <div class="section-tag">05 / DYNAMICS</div>
+    <h2 class="section-title">ORBITAL MECHANICS</h2>
+    <p class="section-desc">The gravitational choreography that governs planetary motion.</p>
+  </div>
+  <div class="orbit-visual-wrap">
+    <canvas id="orbit-canvas"></canvas>
+    <div id="orbit-info-panel">
+      <div class="oip-label">HOVER A PLANET</div>
+      <div id="oip-content">
+        <p style="color:var(--muted); font-size:0.85rem;">Select an orbital body to view its trajectory data.</p>
+      </div>
+    </div>
+  </div>
+  <div class="orbit-table-wrap">
+    <table class="orbit-table">
+      <thead>
+        <tr>
+          <th>PLANET</th>
+          <th>ORBITAL PERIOD</th>
+          <th>SEMI-MAJOR AXIS</th>
+          <th>ECCENTRICITY</th>
+          <th>ORBITAL SPEED</th>
+          <th>INCLINATION</th>
+        </tr>
+      </thead>
+      <tbody id="orbit-tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal-overlay" class="modal-overlay">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">⬡ SpaceAstro</div>
+    <p class="footer-text">All data sourced from NASA, International Space Station Repository, ESA & IAU catalogs. Distances in light-years from Earth.</p>
+    <p class="footer-copy">© 2025 COSMOS EXPLORER — DEEP SPACE DATABASE</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
